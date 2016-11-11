@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class User extends Admin_Controller {
+class User extends Backend_Controller {
 
 	public function __construct()
 	{
@@ -84,11 +84,11 @@ class User extends Admin_Controller {
 
 		// get list of Frontend user groups
 		$this->load->model('group_model', 'groups');
-		$this->mViewData['groups'] = $this->groups->get_all();
+		$data['groups'] = $this->groups->get_all();
 		$this->mTitle = 'Create User';
 
-		$this->mViewData['form'] = $form;
-		$this->render('user/create');
+		$data['form'] = $form;
+		$this->make('user/create',$data);
 	}
 
 	// User Groups CRUD
@@ -135,10 +135,10 @@ class User extends Admin_Controller {
 
 		$this->load->model('user_model', 'users');
 		$target = $this->users->get($user_id);
-		$this->mViewData['target'] = $target;
+		$data['target'] = $target;
 
-		$this->mViewData['form'] = $form;
+		$data['form'] = $form;
 		$this->mTitle = 'Reset User Password';
-		$this->render('user/reset_password');
+		$this->make('user/reset_password',$data);
 	}
 }

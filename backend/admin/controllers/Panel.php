@@ -8,7 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * 	- Admin User Reset Password
  * 	- Account Settings (for login user)
  */
-class Panel extends Admin_Controller {
+class Panel extends Backend_Controller {
 
 	public function __construct()
 	{
@@ -83,11 +83,11 @@ class Panel extends Admin_Controller {
 
 		$groups = $this->ion_auth->groups()->result();
 		unset($groups[0]);	// disable creation of "webmaster" account
-		$this->mViewData['groups'] = $groups;
+		$data['groups'] = $groups;
 		$this->mTitle.= 'Create Admin User';
 
-		$this->mViewData['form'] = $form;
-		$this->render('panel/admin_user_create');
+		$data['form'] = $form;
+		$this->make('panel/admin_user_create',$data);
 	}
 
 	// Admin User Groups CRUD
@@ -124,11 +124,11 @@ class Panel extends Admin_Controller {
 
 		$this->load->model('admin_user_model', 'admin_users');
 		$target = $this->admin_users->get($user_id);
-		$this->mViewData['target'] = $target;
+		$data['target'] = $target;
 
-		$this->mViewData['form'] = $form;
+		$data['form'] = $form;
 		$this->mTitle.= 'Reset Admin User Password';
-		$this->render('panel/admin_user_reset_password');
+		$this->make('panel/admin_user_reset_password',$data);
 	}
 
 	// Account Settings
@@ -137,15 +137,15 @@ class Panel extends Admin_Controller {
 		// Update Info form
 		$form1 = $this->form_builder->create_form('admin/panel/account_update_info');
 		$form1->set_rule_group('panel/account_update_info');
-		$this->mViewData['form1'] = $form1;
+		$data['form1'] = $form1;
 
 		// Change Password form
 		$form2 = $this->form_builder->create_form('admin/panel/account_change_password');
 		$form1->set_rule_group('panel/account_change_password');
-		$this->mViewData['form2'] = $form2;
+		$data['form2'] = $form2;
 
 		$this->mTitle = "Account Settings";
-		$this->render('panel/account');
+		$this->make('panel/account',$data);
 	}
 
 	// Submission of Update Info form

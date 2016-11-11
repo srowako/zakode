@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Demo extends Admin_Controller {
+class Demo extends Backend_Controller {
 
 	public function __construct()
 	{
@@ -19,7 +19,7 @@ class Demo extends Admin_Controller {
 	public function adminlte()
 	{
 		$this->mTitle.= 'AdminLTE Components';
-		$this->render('demo/adminlte');
+		$this->make('demo/adminlte');
 	}
 
 	// Grocery CRUD - Blog Posts
@@ -52,7 +52,7 @@ class Demo extends Admin_Controller {
 		$crud = $this->generate_crud('demo_blog_categories');
 		$crud->columns('title');
 		$this->mTitle.= 'Blog Categories';
-		$this->mViewData['crud_note'] = modules::run('adminlte/widget/btn', 'Sort Order', 'demo/blog_category_sortable');
+		$data['crud_note'] = modules::run('adminlte/widget/btn', 'Sort Order', 'demo/blog_category_sortable');
 		$this->render_crud();
 	}
 	
@@ -61,9 +61,9 @@ class Demo extends Admin_Controller {
 	{
 		$this->load->library('sortable');
 		$this->sortable->init('demo_blog_category_model');
-		$this->mViewData['content'] = $this->sortable->render('{title}', 'demo/blog_category');
+		$data['content'] = $this->sortable->render('{title}', 'demo/blog_category');
 		$this->mTitle.= 'Blog Categories';
-		$this->render('general');
+		$this->make('general',$data);
 	}
 
 	// Grocery CRUD - Blog Tags
@@ -86,26 +86,26 @@ class Demo extends Admin_Controller {
 	public function item($demo_id)
 	{
 		$this->mTitle.= 'Item '.$demo_id;
-		$this->mViewData['demo_id'] = $demo_id;
-		$this->render('demo/item');
+		$data['demo_id'] = $demo_id;
+		$this->make('demo/item',$data);
 	}
 	
 	// Pagination widget
 	public function pagination()
 	{
 		$this->load->library('pagination');
-		$this->mViewData['pagination'] = $this->pagination->render(200, 20);
+		$data['pagination'] = $this->pagination->render(200, 20);
 		$this->mTitle.= 'Pagination';
-		$this->render('demo/pagination');
+		$this->make('demo/pagination',$data);
 	}
 	
 	// Sortable widget
 	public function sortable()
 	{
-		$this->mViewData['entries'] = array(
+		$data['entries'] = array(
 			'Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'
 		);
 		$this->mTitle.= 'Sortable';
-		$this->render('demo/sortable');
+		$this->make('demo/sortable',$data);
 	}
 }

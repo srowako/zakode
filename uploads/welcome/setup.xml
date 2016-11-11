@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<module>
+        <name>welcome</name>
+        <date>06/10/2015</date>
+        <author>Reko Srowako</author>
+        <email>reko@e-corr.com</email>
+        <url>http://www.e-corr.com</url>
+        <copyright>GNU/GPL License</copyright>
+        <version>1.0.3</version>
+        <description>CORE - Electronic Correspondence</description>
+        <install>
+            <query>
+                CREATE TABLE IF NOT EXISTS test(
+                id int(11) NOT NULL auto_increment,
+                g_name varchar(255) NOT NULL default '',
+                g_site varchar(255) NOT NULL default '',
+                g_email varchar(255) NOT NULL default '',
+                g_ip varchar(255) NOT NULL default '',
+                g_msg text NOT NULL,
+                g_date int(11) NOT NULL default '0',
+                g_country varchar(255) NOT NULL default '',
+                PRIMARY KEY  (id),
+                KEY g_name (g_name)
+                );
+            </query>
+        </install>
+        <uninstall>
+            <query>
+                DROP TABLE IF EXISTS test;
+            </query>
+        </uninstall>
+</module>

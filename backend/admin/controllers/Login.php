@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 // NOTE: this controller inherits from MY_Controller instead of Admin_Controller,
 // since no authentication is required
-class Login extends MY_Controller {
+class Login extends Frontend_Controller {
 
 	/**
 	 * Login page and submission
@@ -37,9 +37,10 @@ class Login extends MY_Controller {
 		}
 		
 		// display form when no POST data, or validation failed
-		$this->mViewData['body_class'] = 'login-page';
-		$this->mViewData['form'] = $form;
+		$data['body_class'] = 'login-page';
+		$data['form'] = $form;
 		$this->mBodyClass = 'login-page';
-		$this->render('login', 'empty');
+                $this->template->set_layout('login');
+		$this->make('login',$data);
 	}
 }

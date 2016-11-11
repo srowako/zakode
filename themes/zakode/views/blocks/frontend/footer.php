@@ -115,4 +115,7 @@
 ?>
 <?php // Google Analytics ?>
 <?php echo $template['partials']['fe_ga']; ?>
+<?php  
+//echo $chat;
+ ?>
 

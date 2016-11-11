@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * For demo purpose only
  */
-class Demo extends MY_Controller {
+class Demo extends Frontend_Controller {
 
 	public function __construct()
 	{
