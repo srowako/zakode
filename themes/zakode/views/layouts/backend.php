@@ -24,6 +24,7 @@
                         <?php echo $template['partials']['be_breadcrumb']; ?>
 		</section>
 		<section class="content">
+                        <?php echo $template['partials']['be_message']; ?>
 			<?php echo $template['body']; ?>
 			<?php echo $template['partials']['be_back_btn']; ?>
 		</section>

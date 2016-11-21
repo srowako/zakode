@@ -47,6 +47,9 @@ $config['site'] = array(
 
 	// Multilingual settings (set empty array to disable this)
 	'multilingual' => array(),
+    
+        //Module path
+        'module_path' => array('backend', 'frontend', 'plugins', 'upload'),
 
 	// AdminLTE settings
 	'adminlte' => array(

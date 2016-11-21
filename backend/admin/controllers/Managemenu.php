@@ -42,9 +42,12 @@ class Managemenu extends Backend_Controller {
     public function add() {
         $data['group_id'] = ($this->input->post('group_id')) ? $this->input->post('group_id') : NULL;
         if (isset($data['group_id'])) {
+//            $data['title'] = ($this->input->post('title')) ? $this->input->post('title') : 'untitled';
             $data['label'] = ($this->input->post('label')) ? $this->input->post('label') : 'unlabel';
             $data['url'] = ($this->input->post('url')) ? $this->input->post('url') : '#';
             $data['icon'] = ($this->input->post('icon')) ? $this->input->post('icon') : 'fa fa-ellipsis-v';
+//            $data['new_tab'] = ($this->input->post('newtab')) ? $this->input->post('newtab') : '0';
+//            $data['css'] = ($this->input->post('css')) ? $this->input->post('css') : NULL;
             $data['description'] = ($this->input->post('description')) ? $this->input->post('description') : '';
             $data['created_at'] = time();
             $data['updated_at'] = time();
@@ -92,9 +95,12 @@ class Managemenu extends Backend_Controller {
     public function edit() {
         if ($this->input->post() && $this->input->post('edit_id')) {
             $id = $this->input->post('edit_id');
+//            $data['title'] = ($this->input->post('edit_title')) ? $this->input->post('edit_title') : 'untitled';
             $data['label'] = ($this->input->post('edit_label')) ? $this->input->post('edit_label') : 'unlabel';
             $data['url'] = ($this->input->post('edit_url')) ? $this->input->post('edit_url') : '#';
             $data['icon'] = ($this->input->post('edit_icon')) ? $this->input->post('edit_icon') : 'fa fa-ellipsis-v';
+//            $data['new_tab'] = ($this->input->post('edit_new_tab')) ? $this->input->post('edit_new_tab') : '0';
+//            $data['css'] = ($this->input->post('edit_css')) ? $this->input->post('edit_css') : NULL;
             $data['description'] = ($this->input->post('edit_description')) ? $this->input->post('edit_description') : '';
             $data['updated_at'] = time();
             $this->zakode_menu_model->edit_record($id, $data);
