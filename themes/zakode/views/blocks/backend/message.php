@@ -1,48 +1,44 @@
 <?php
 if(!isset($message) or !is_array($message)) $message =[];
-
+else{
+    
 if(!isset($message['nonAjax']))
 	$message['nonAjax'] = 0;
 switch (strtolower($this->session->flashdata('messageTitle')[0])) {
+    
 	case 'w':
-	$alert = 'alert-warning';
+	$alert = 'alert alert-warning alert-dismissible';
 	break;
+    
 	case 's':
-	$alert = 'alert-success';
+	$alert = 'alert alert-success alert-dismissible';
 	break;
-	case '':
-	$alert = 'hidden';
+    
+        case 'd':
+	$alert = 'alert alert-danger alert-dismissible';
 	break;
-	default:
-	$alert = 'alert-danger';
-	break;
+    
+        default:
+	$alert = 'alert alert-info alert-dismissible';
+	break;	
 }
 ?>
-<div class="row">
-	<div class="col-lg-offset-1 col-lg-10">
-		<div id="message" class="alert <?php echo $alert ?>">
-			<strong><p id="messageTitle"><?php echo $this->session->flashdata('messageTitle'); ?></p></strong>
 
-			<div id="messageBody"><?php echo $this->session->flashdata('messageBody') ?></div>
-		</div>
-	</div>
+<div class="<?php echo $alert ?>">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <h4><i class="icon fa fa-info"></i> <?php echo $this->session->flashdata('messageTitle'); ?></h4>
+    <?php echo $this->session->flashdata('messageBody') ?>
 </div>
 
 <?php if($message['nonAjax']): ?>
-<div class="row">
-	<div class="col-lg-offset-1 col-lg-10">
-		<div id="message" class="alert <?php echo $message['messageClass']; ?>">
-			<strong><p id="messageTitle"><?php echo $message['messageTitle']; ?></p></strong>
 
-			<div id="messageBody"><?php echo $message['messageBody']; ?></div>
-		</div>
-	</div>
+<div class="<?php echo $message['messageClass']; ?>">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <h4><i class="icon fa fa-info"></i> <?php echo $this->session->flashdata('messageTitle'); ?></h4>
+    <?php echo $this->session->flashdata('messageBody') ?>
 </div>
-<?php endif; ?>
 
-<script type="text/javascript">
-	$(document).ready(function ()
-	{
-		$(this).removeSuccessMessage();
-	});
-</script>
+<?php endif; 
+}
+?>
+

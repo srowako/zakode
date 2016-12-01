@@ -14,6 +14,7 @@ class Managemenu extends Backend_Controller {
     function __construct() {
         parent::__construct();
         $this->load->model('zakode_menu_model');
+        $this->load->library('form_builder');
     }
 
     /**
@@ -169,7 +170,20 @@ class Managemenu extends Backend_Controller {
         $record = $this->zakode_menu_model->get_menu_detail($edit_id);
         echo $record->title . "###" . $record->effect . "###" . $record->color;
     }
+    
+    /**
+     * get_permissions_menu_data
+     * Get permissions detail
+     */
+    public function setpermission() {
+        $crud = $this->generate_crud('zakode_menus');
+        $crud->columns('label', 'url', 'Permission');
+        $crud->fields('label','Permission');
+        $crud->set_relation_n_n('Permission', 'menus_permissions', 'admin_groups', 'menu_id', 'group_id', 'description', 'priority');
+        $this->render_crud();
+    } 
 
+    
 }
 
 /* end of class Managemenu  */

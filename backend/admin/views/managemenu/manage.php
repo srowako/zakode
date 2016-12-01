@@ -61,9 +61,9 @@
   </div>
   </div>
             <!-- // Tab content END -->
-
+            <a title="Permission" href='javascript:;' class='top_menu_permission_toggle' rel='<?php echo $top_menu_id?>' onclick="get_permission_data(<?php echo $top_menu_id?>)"><i class="icon-edit icon-2x"></i></a>  
             <a title="Edit" href='javascript:;' class='top_menu_edit_toggle' rel='<?php echo $top_menu_id?>' onclick="get_edit_data(<?php echo $top_menu_id?>)"><i class="icon-edit icon-2x"></i></a>  
-         <a title="Delete" onclick="if(confirm('Do you want to delete this Menu, this will delete all its sub menu ?')){window.location.href='<?php echo base_url('admin/managemenu/delete_top_menu/'.$top_menu_id)?>';}" href="javascript:;"><i class="icon-trash icon-2x"></i></a>   
+            <a title="Delete" onclick="if(confirm('Do you want to delete this Menu, this will delete all its sub menu ?')){window.location.href='<?php echo base_url('admin/managemenu/delete_top_menu/'.$top_menu_id)?>';}" href="javascript:;"><i class="icon-trash icon-2x"></i></a>   
         </div>
     </div>
 </div>

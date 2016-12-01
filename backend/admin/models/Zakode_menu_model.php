@@ -56,6 +56,7 @@ class Zakode_menu_model extends CI_Model {
                 <input type='hidden' id='url_" . $item->id . "' value='" . $item->url . "'>
                 <input type='hidden' id='icon_" . $item->id . "' value='" . $item->icon . "'>
                 <input type='hidden' id='description_" . $item->id . "' value='" . $item->description . "'>
+                  <a href='".base_url()."admin/managemenu/setpermission/edit/".$item->id."'>Permission</a> |
 	          <a href='javascript:;' class='edit_toggle' rel='$item->id'>Edit</a> |
 	          <a href='javascript:;' class='delete_toggle' rel='$item->id'>Delete</a>
 	        </div>
@@ -103,11 +104,17 @@ class Zakode_menu_model extends CI_Model {
                 <input type="hidden" id="url_' . $ins_id . '" value="' . $data['url'] . '">
                 <input type="hidden" id="icon_' . $ins_id . '" value="' . $data['icon'] . '">   
 		<input type="hidden" id="description_' . $ins_id . '" value="' . $data['description'] . '">
+                <a href="'.base_url().'"admin/managemenu/setpermission/edit/"'.$item->id.'">Permission</a> |
 	        <a href="javascript:;" class="edit_toggle" rel="' . $ins_id . '">Edit</a> |
 	        <a href="javascript:;" class="delete_toggle" rel="' . $ins_id . '">Delete</a>
 	        </div>
                 </div></li>';
         echo $str;
+        $data_group = array(
+            'menu_id'   => $ins_id,
+            'group_id'  => 1
+        );
+        $this->db->insert('menus_permissions',$data_group);
     }
 //<input type="hidden" id="title_' . $ins_id . '" value="' . $data['title'] . '">
 //    <input type="hidden" id="new_tab_' . $ins_id . '" value="' . $data['new_tab'] . '">
@@ -132,6 +139,7 @@ class Zakode_menu_model extends CI_Model {
     public function delete_record($id) {
         if ($this->db->where(array('id' => $id))->delete(ZAKODE_MENU)) {
             echo "ok";
+            $this->db->where('menu_id',$id)->delete('menus_permissions');            
         } else {
             echo 'error';
         }

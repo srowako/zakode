@@ -20,6 +20,7 @@
 	<?php // Right side column. Contains the navbar and content of the page ?>
 	<div class="content-wrapper">
 		<section class="content-header">
+                    
 			<h1><?php echo $page_title; ?></h1>
                         <?php echo $template['partials']['be_breadcrumb']; ?>
 		</section>

