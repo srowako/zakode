@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <module>
         <name>welcome</name>
+        <type>Frontend wiget</type>
         <date>06/10/2015</date>
         <author>Reko Srowako</author>
         <email>reko@e-corr.com</email>

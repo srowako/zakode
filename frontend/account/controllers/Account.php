@@ -8,12 +8,26 @@ class Account extends Frontend_Controller {
 		parent::__construct();
 		
 		// only login users can access Account controller
-		$this->verify_login();
+//		$this->verify_login();
 	}
 
 	public function index()
 	{
-		$data['user'] = $this->mUser;
+            if ( $this->ion_auth->logged_in() ){
+                $data['user'] = $this->mUser;
 		$this->make('account',$data);
+            }else{
+                
+            }		
+	}
+        public function sidebar()
+	{
+            if ( $this->ion_auth->logged_in() ){
+                $data['user'] = $this->mUser;
+		$this->load->view('sidebar',$data);
+            }else{
+                
+            }
+		
 	}
 }

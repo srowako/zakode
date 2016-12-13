@@ -10,7 +10,7 @@ class Module extends Backend_Controller {
     function index()
     {
         $this->load->helper('xml');
-        $this->db->order_by('ordering');
+        $this->db->order_by('type','ordering');
         $query = $this->db->get('modules');
 
         if($rows = $query->result_array())
@@ -38,6 +38,7 @@ class Module extends Backend_Controller {
                     {
                         $modules[$module] = array(
                                 'name' => $module,
+                                'type' => null,
                                 'status' => -1,
                                 'description' => null,
                                 'version' => null
@@ -62,6 +63,61 @@ class Module extends Backend_Controller {
         $this->make('module',$this->data);
     }
 
+    function wget()
+    {
+        $this->load->helper('xml');
+        $this->db->order_by('type','ordering');
+        $query = $this->db->get_where('modules', array('type =' => 'Frontend wiget'));
+        if($rows = $query->result_array())
+        {
+            $modules = array();
+            foreach ( $rows as $module ) 
+            {
+                $modules[ $module['name'] ] = $module;
+            }
+        }
+        /*
+        Check if all physical modules are installed
+        */
+        unset( $module );
+        $handle = opendir(APPPATH.'../zakode/uploads/');
+        if ($handle)
+        {
+            while ( false !== ($module = readdir($handle)) )
+            {
+                // make sure we don't map silly dirs like .svn, or . or .. 
+                //APPPATH.'../zakode/uploads/' => '../../zakode/uploads/'
+                if ( (substr($module, 0, 1) != ".") && file_exists(APPPATH.'../zakode/uploads/' .$module. '/setup.xml') )
+                {
+                    if ( !isset($modules[$module]))
+                    {
+                        $modules[$module] = array(
+                                'name' => $module,
+                                'type' => null,
+                                'status' => -1,
+                                'description' => null,
+                                'version' => null
+                        );
+                    }
+                    else
+                    {
+                        //get physical version from xml for eventual update
+                        $xmldata = join('', file(APPPATH.'../zakode/uploads/' .$module. '/setup.xml'));
+                        $xmlarray = xmlize($xmldata);
+                        if (isset($xmlarray['module']['#']['name'][0]['#']) && trim($xmlarray['module']['#']['name'][0]['#']) == $module)
+                        {
+
+                            $modules[$module]['nversion'] = isset($xmlarray['module']['#']['version'][0]['#']) ? trim($xmlarray['module']['#']['version'][0]['#']) : '';							}
+                    }
+                }
+//                    $modserver = Modules::run('admin/get_modules'); //Release New Modules from Repository
+            }
+        }
+        $this->data['modules'] = $modules;
+//        $this->data['modserver'] = $modserver;
+        $this->make('module',$this->data);
+    }
+    
     function activate($module = null)
     {
         if (is_null($module))
@@ -214,13 +270,11 @@ class Module extends Backend_Controller {
             if (isset($xmlarray['module']['#']['name'][0]['#']) && trim($xmlarray['module']['#']['name'][0]['#']) == $module)
             {
                 $data['name'] = trim($xmlarray['module']['#']['name'][0]['#']);
+                $data['type'] = trim($xmlarray['module']['#']['type'][0]['#']);
                 $data['description'] = isset($xmlarray['module']['#']['description'][0]['#']) ? trim($xmlarray['module']['#']['description'][0]['#']): '';
                 $data['version'] = isset($xmlarray['module']['#']['version'][0]['#']) ? trim($xmlarray['module']['#']['version'][0]['#']) : '';
                 $data['status'] = 0;
                 $data['ordering'] = 1000;
-                $info['name'] = trim($xmlarray['module']['#']['name'][0]['#']);
-                $info['description'] = isset($xmlarray['module']['#']['description'][0]['#']) ? trim($xmlarray['module']['#']['description'][0]['#']): '';
-                $info['version'] = isset($xmlarray['module']['#']['version'][0]['#']) ? trim($xmlarray['module']['#']['version'][0]['#']) : '';
                 $info['date'] = $xmlarray['module']['#']['date'][0]['#'];
                 $info['author'] = $xmlarray['module']['#']['author'][0]['#'];
                 $info['email'] = $xmlarray['module']['#']['email'][0]['#'];
@@ -250,17 +304,17 @@ class Module extends Backend_Controller {
 
                 $this->db->insert('modules', $data);
                 m('s',t('The module is instaled'));
-                redirect('admin/module');
+                redirect($_SERVER['REQUEST_URI'], 'refresh');
             }
             else
             {
-                redirect('admin/module');
+                redirect($_SERVER['REQUEST_URI'], 'refresh');
             }
 
         }
         else
         {
-            redirect('admin/module');
+            redirect($_SERVER['REQUEST_URI'], 'refresh');
         }
     }
 

@@ -5,6 +5,7 @@
         <tr>
             <th width="3%" class="center">#</th>
             <th width="20%"><?php echo "Name" ?></th>
+            <th width="20%"><?php echo "Type" ?></th>
             <th width="37%"><?php echo "Description"?></th>
             <th width="10%"><?php echo "Version"?></th>				
             <th width="30%" colspan="3"><?php echo "Action"?></th>
@@ -16,6 +17,7 @@
     <tr class="<?php echo $rowClass?>">
         <td class="center"><?php echo $i?></td>
         <td><?php echo $row['name']?></td>
+        <td><?php echo $row['type']?></td>
         <td><?php echo $row['description']?></td>
         <td><?php echo $row['version']?></td>
         <td>
