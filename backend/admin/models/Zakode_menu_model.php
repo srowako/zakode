@@ -21,7 +21,7 @@ class Zakode_menu_model extends CI_Model {
      * @return array
      */
     public function get_menu($top_menu_id) {
-        $result = $this->db->from(ZAKODE_MENU)->order_by('order', 'asc')->where(array('group_id' => $top_menu_id))->get();
+        $result = $this->db->from(ZAKODE_MENU)->order_by('order', 'asc')->where(array('m_groups' => $top_menu_id))->get();
         return $this->buildMenu($result->result());
     }
 
@@ -30,7 +30,7 @@ class Zakode_menu_model extends CI_Model {
      * @return array
      */
     public function get_top_menu() {
-        $result = $this->db->from(ZAKODE_MENU)->order_by('order', 'asc')->where(array('group_id' => '0'))->get();
+        $result = $this->db->from(ZAKODE_MENU)->order_by('order', 'asc')->where(array('m_groups' => '0'))->get();
         if ($result->num_rows() > '0')
             return $result->result();
         return NULL;
@@ -165,7 +165,7 @@ class Zakode_menu_model extends CI_Model {
      * @return null
      */
     public function delete_top_menu_item($id) {
-        $this->db->or_where(array('group_id' => $id, 'id' => $id))->delete(ZAKODE_MENU);
+        $this->db->or_where(array('m_groups' => $id, 'id' => $id))->delete(ZAKODE_MENU);
     }
 
     /**

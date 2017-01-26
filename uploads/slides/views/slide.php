@@ -1,4 +1,5 @@
-<div id="carousel-home" class="carousel slide" data-ride="carousel" style="width:1000px">
+<div class="box-header with-border">
+    <div id="carousel-home" class="carousel slide" data-ride="carousel" style="max-width: 1000px; margin: 0 auto">
 
 	<!-- Indicators -->
 	<ol class="carousel-indicators">
@@ -11,9 +12,9 @@
 	<div class="carousel-inner" role="listbox">
 		<?php for ($i=0; $i<count($photos); $i++): ?>
 		<div class="item <?php if ($i==0) echo "active"; ?>">
-			<img href="https://unsplash.com/" src="<?php echo $photos[$i]->image_url; ?>" alt="Photo <?php echo $i+1; ?>" />
+			<img src="<?php echo $photos[$i]->image_url; ?>" alt="Photo <?php echo $i+1; ?>" />
 			<div class="carousel-caption">
-				<p>Image Source: <a href="https://unsplash.com/">https://unsplash.com/</a></p>
+				<p>Image Source: <a href="<?php echo $photos[$i]->link; ?>"><?php echo $photos[$i]->text; ?></a></p>
 			</div>
 		</div>
 		<?php endfor; ?>
@@ -28,4 +29,5 @@
 		<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
 		<span class="sr-only">Next</span>
 	</a>
+    </div>
 </div>

@@ -41,8 +41,8 @@ class Managemenu extends Backend_Controller {
      * return string
      */
     public function add() {
-        $data['group_id'] = ($this->input->post('group_id')) ? $this->input->post('group_id') : NULL;
-        if (isset($data['group_id'])) {
+        $data['m_groups'] = ($this->input->post('m_groups')) ? $this->input->post('m_groups') : NULL;
+        if (isset($data['m_groups'])) {
 //            $data['title'] = ($this->input->post('title')) ? $this->input->post('title') : 'untitled';
             $data['label'] = ($this->input->post('label')) ? $this->input->post('label') : 'unlabel';
             $data['url'] = ($this->input->post('url')) ? $this->input->post('url') : '#';
@@ -177,9 +177,14 @@ class Managemenu extends Backend_Controller {
      */
     public function setpermission() {
         $crud = $this->generate_crud('zakode_menus');
-        $crud->columns('label', 'url', 'Permission');
-        $crud->fields('label','Permission');
+        $crud->columns('url', 'Permission');
+        $crud->fields('Permission');
+        $text_update = 'Your data has been successfully stored into the database.<br/>Please wait while you are redirecting to the list page.<script type="text/javascript">window.location = "admin/managemenu/menu/75";</script><div style="display:none">';
+        $crud->set_lang_string('update_success_message',$text_update);
         $crud->set_relation_n_n('Permission', 'menus_permissions', 'admin_groups', 'menu_id', 'group_id', 'description', 'priority');
+        $crud->unset_back_to_list();
+        $crud->unset_list();
+        $crud->unset_delete();
         $this->render_crud();
     } 
 

@@ -153,6 +153,6 @@ $config['site'] = array(
 	// For debug purpose (available only when ENVIRONMENT = 'development')
 	'debug' => array(
 		'view_data'		=> FALSE,	// whether to display MY_Controller's mViewData at page end
-		'profiler'		=> FALSE,	// whether to display CodeIgniter's profiler at page end
+		'profiler'		=> TRUE,	// whether to display CodeIgniter's profiler at page end
 	),
 );

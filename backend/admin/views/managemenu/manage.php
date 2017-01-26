@@ -218,7 +218,7 @@
             </div>
          </div>
          <div class="modal-footer">
-             <input type="hidden" name="group_id" id="group_id" value="<?php echo $top_menu_id?>" />
+             <input type="hidden" name="m_groups" id="m_groups" value="<?php echo $top_menu_id?>" />
            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
            <button type="submit" class="btn btn-primary">Create</button>
          </div>
