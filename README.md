@@ -19,7 +19,9 @@ ZaKode/
     └── index.php
 ```
 
-www.Zakode.com
+## Version
+
+```
 [01-07-2019] - 1.0.3
 - Update, Third_party GroceryCrud 1.6.3
 - Update, Codeigniter 3.1.10
@@ -38,5 +40,4 @@ www.Zakode.com
 
 [10-08-2017] - 1.0.0
 - Release New Version
-
-Support
+```
